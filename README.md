@@ -1,4 +1,4 @@
-# IoT_App (AWS_MQ
+# IoT_App (AWS_MQTT_MutualAuth_Demo)
 
 This is WiP and shows a project that uses clayers and creates there different targets:
 - Board-WiFi: IMXRT1050 board with ESP8266 module connecting via WiFi using built-in sockets
