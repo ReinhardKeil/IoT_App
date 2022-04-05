@@ -2,11 +2,19 @@
 
 This contains some proposals the [**Project Setup for Multiple Targets and Builds**](https://github.com/Open-CMSIS-Pack/devtools/blob/main/tools/projmgr/docs/Manual/Overview.md#project-setup-for-multiple-targets-and-builds).
 
+- [Proposal for Layer Support](#proposal-for-layer-support)
+  - [Example Project](#example-project)
+  - [References to Layers stored in Packs](#references-to-layers-stored-in-packs)
+  - [Changes to the *.PDSC file](#changes-to-the-pdsc-file)
+    - [Board Layer from Pack to Project](#board-layer-from-pack-to-project)
+  - [RTE Directory](#rte-directory)
+    - [RTE Component directories configurable](#rte-component-directories-configurable)
+    - [RTE Base Directory](#rte-base-directory)
+  
 
-## Example Project 
+## Example Project
 
 The current AWS example project has this structure.  It is basically configurable to three different interfaces: Ethernet, WiFi, Socket.
-
 
 Layer               | Board-TCP              | Board-WiFi            | AVH
 :-------------------|:-----------------------|:----------------------|:--------------------------
@@ -26,6 +34,7 @@ Board               | MIMXRT1050-EVKB        | MIMXRT1050-EVKB (+ESP8266)     | 
 When `{Board}` layers are stored in packs, the encoded features could indicate if a configuration would work or not.
 
 Potentially, the `{Board}` layer `provided:` interfaces could be reduced to:
+
   - Communication: Ethernet, WiFi, Socket
   - Input: Audio, Sensor
   - Output: Audio
@@ -62,7 +71,7 @@ The `csolution` tool would issue an error when a `{Board}` layer does not exist 
 
 ## Changes to the *.PDSC file
 
-It should be possible to register several layers in a `*.PDSC` file.  The actual layers could look like:
+It should be possible to register several layers in a `*.PDSC` file.  In a Board Support Pack (BSP) the actual Board layers could look like:
 ```xml
   <csolution>
     <clayer type="Board" name="./Board/MIMXRT1050-EVKB/Board.clayer.yml" directory="./clayers/Board/Basic"/>
@@ -72,9 +81,10 @@ It should be possible to register several layers in a `*.PDSC` file.  The actual
     <clayer type="Board" name="./Board/MIMXRT1050-EVKB/Board.clayer.yml" directory="./clayers/Board/SensorIn"/>
   </csolution>
 ```
-The required layer could be identified based on the `provided:` interfaces.
+The required layer could be identified based on the `provided:` interfaces.  The `required:` interfaces can be defined by the other layers.
 
 The `<csolution>` element could also contain different types with:
+
   - `cproject` a generic example projects
   - `cimage` a pre-build image that should be added to a csolution
   - `clayer` a software layer 
@@ -94,12 +104,12 @@ The directory structure of a board layer in the software pack could be:
 ```
 ./clayers/Board/WiFi/                          # base directory of the WiFi configuration
 ./clayers/Board/WiFi/Board/MIMXRT1050-EVKB     # clayer.yml and other source files
-./clayers/Board/WiFi/RTE                       # component configurations of the Baord layer
+./clayers/Board/WiFi/RTE                       # component configurations of the Board layer
 ```
 
 A {Board} layer is copied by the `csolution` tool to the project with this structure:
 ```
-./RTE                                          # component configurations of the Baord layer
+./RTE                                          # component configurations of the Board layer
 ./Board/MIMXRT1050-EVKB                        # clayer.yml and other source files
 ```
 
@@ -150,4 +160,3 @@ Likewise the RTE Base directory could be configurable, but currently the use cas
 ```yml
    RTE-base:  .\RTE2           # change the default .\RTE directory to .\RTE2
 ```
-

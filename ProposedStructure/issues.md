@@ -1,5 +1,19 @@
 # Issues
 
+- [Issues](#issues)
+  - [Project Structure](#project-structure)
+  - [clayer files.](#clayer-files)
+    - [Interface Layer](#interface-layer)
+    - [App Layer](#app-layer)
+    - [Device configuration (Board specific)](#device-configuration-board-specific)
+  - [CSolution Issues](#csolution-issues)
+    - [PROBLEM: Handling of *.clayer.yml file references](#problem-handling-of-clayeryml-file-references)
+    - [Proposed Directories (IntDir, OutDir)](#proposed-directories-intdir-outdir)
+    - [MINOR: Config files in RTE Directory](#minor-config-files-in-rte-directory)
+    - [MINOR: Suggest to remove warning](#minor-suggest-to-remove-warning)
+  - [MDK Importer Issues](#mdk-importer-issues)
+    - [Other MDK problems](#other-mdk-problems)
+
 ## Project Structure
 
 This are suggestions on how to rework the project structure for VS Code and KSC project management
