@@ -62,7 +62,7 @@ The `csolution` tool would issue an error when a `{Board}` layer does not exist 
 
 ## Changes to the *.PDSC file
 
-It should be possible to register several layers in a `*.PDSC` file.  The actual layer
+It should be possible to register several layers in a `*.PDSC` file.  The actual layers could look like:
 ```xml
   <csolution>
     <clayer type="Board" name="./Board/MIMXRT1050-EVKB/Board.clayer.yml" directory="./clayers/Board/Basic"/>
@@ -88,6 +88,37 @@ The `<csolution>` element could also contain different types with:
   </csolution>
 ```
 
+### Board Layer from Pack to Project
+
+The directory structure of a board layer in the software pack could be:
+```
+./clayers/Board/WiFi/                          # base directory of the WiFi configuration
+./clayers/Board/WiFi/Board/MIMXRT1050-EVKB     # clayer.yml and other source files
+./clayers/Board/WiFi/RTE                       # component configurations of the Baord layer
+```
+
+A {Board} layer is copied by the `csolution` tool to the project with this structure:
+```
+./RTE                                          # component configurations of the Baord layer
+./Board/MIMXRT1050-EVKB                        # clayer.yml and other source files
+```
+
+When it is copied a file `Board.clayer.txt` is created that contains information about:
+  - the original pack that contained the layer.
+  - the variant of the layer that is copied.
+  - optionally some version information.
+  
+The `csolution` tool does not copy the layer when:
+  - there is already a `Board.clayer.txt` in the target directory
+  - a existing file in the `RTE` directory would be overwritten
+  
+The `csolution` tool issues no warning when the `Board.clayer.txt` indicates that the selected layer has the same variant/version.
+
+The *Access Sequence* `{Board}` in the `*.cproject.yml` is replaced by `name` of the selected `*.PDSC` file element:
+```
+./Board/MIMXRT1050-EVKB/Board.clayer.yml
+```
+
 
 ## RTE Directory
 
@@ -99,7 +130,7 @@ as the configuration is in many cases shared and identical.
 However there might be situations where the configuration of components, for example for the `Board` should be different.  
 This could be supported by adding the node `RTE-component-class:` to the `target-types:` list in the `*.csolution.yml` file as shown below.
 
-```
+```yml
   target-types:
     - type: Board-WiFi         # for NXP EVKB_IMXRT1050 with ESP8266
       board: EVKB-IMXRT1050_MDK
@@ -116,7 +147,7 @@ This could be supported by adding the node `RTE-component-class:` to the `target
 ### RTE Base Directory
 
 Likewise the RTE Base directory could be configurable, but currently the use case for this is unclear.  For example:
-```
+```yml
    RTE-base:  .\RTE2           # change the default .\RTE directory to .\RTE2
 ```
 
