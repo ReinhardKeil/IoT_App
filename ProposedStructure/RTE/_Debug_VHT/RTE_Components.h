@@ -3,7 +3,7 @@
  * Auto generated Run-Time-Environment Configuration File
  *      *** Do not modify ! ***
  *
- * Project: 'AWS_MQTT_MutualAuth_Demo.Debug+VHT' 
+ * Project: 'AWS_MQTT_Proposed.Debug+VHT' 
  * Target:  'Debug+VHT' 
  */
 

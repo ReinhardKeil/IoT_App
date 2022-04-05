@@ -7,7 +7,28 @@ This is WiP and shows a project that uses clayers and creates there different ta
 
 Trying out the demo:
 
->NOTE:  RQUIRED ARE EXACTLY THIS VERSIONS OF THE NXP PACKS (These are not yet checked by the tool):
+The following pack versions where used to compile this demo (it should compile also with newer versions, except for the NXP Device Support - see NOTE):
+```
+ARM::CMSIS-Driver@2.6.1
+ARM::CMSIS-FreeRTOS@10.4.6
+ARM::CMSIS@5.8.0
+ARM::mbedTLS@1.7.0
+AWS::FreeRTOS-Plus-TCP@2.3.2-Beta
+AWS::backoffAlgorithm@1.0.0-Beta
+AWS::coreMQTT@1.1.0-Beta
+AWS::coreMQTT_Agent@1.0.1-Beta
+AWS::corePKCS11@3.0.0-Beta
+Arm-Packs::PKCS11@1.0.0
+Keil::ARM_Compiler@1.6.3
+NXP::MIMXRT1052_DFP@13.1.0
+NXP::EVKB-IMXRT1050_BSP@13.1.0
+Keil::IMXRT1050-EVKB_BSP@1.0.0
+Keil::iMXRT105x_MWP@1.4.0
+Keil::V2M-MPS2_CMx_BSP@1.8.0
+MDK-Packs::IoT_Socket@1.3.0
+```
+
+>NOTE:  REQUIRED ARE EXACTLY THIS VERSIONS OF THE NXP PACKS (These are not yet checked by the tool):
 >   - pack: NXP::MIMXRT1052_DFP@13.1.0
 >   - pack: NXP::EVKB-IMXRT1050_BSP@13.1.0
 >   - pack: Keil::IMXRT1050-EVKB_BSP@1.0.0

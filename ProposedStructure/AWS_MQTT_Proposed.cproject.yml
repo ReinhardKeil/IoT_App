@@ -18,18 +18,18 @@ project:
       for-type: 
         - +Board-WiFi
 
-    - layer: ./Interfaces/AWS/FreeRTOS+TCP/Interface.clayer.yml   # should be just ./Interface/
+    - layer: ./Interfaces/FreeRTOS+TCP/Interface.clayer.yml   # should be ./Interface/AWS/FreeRTOS+TCP/Interface.clayer.yml
       for-type:
         - +Board-TCP
 
-    - layer: ./Interfaces/AWS/Socket/Interface.clayer.yml         # should be just ./Interface/
+    - layer: ./Interfaces/Socket/Interface.clayer.yml         # should be ./Interface/AWS/Socket/Interface.clayer.yml
       for-type:
         - +VHT
 
-    - layer: ./Interfaces/AWS/WiFi/Interface.clayer.yml           # should be just ./Interface/
+    - layer: ./Interfaces/WiFi/Interface.clayer.yml           # should be ./Interface/AWS/WiFi/Interface.clayer.yml
       for-type:
         - +Board-WiFi
 
-    - layer: ./Socket/VSocket/Socket.clayer.yml
+    - layer: ./Socket/VSocket/Socket.clayer.yml                   # should this go to the VHT Board Layer?
       for-type:
         - +VHT
