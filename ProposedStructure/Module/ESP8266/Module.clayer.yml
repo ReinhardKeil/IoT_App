@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Open-CMSIS-Pack/devtools/schemas/projmgr/0.9.1/tools/projmgr/schemas/clayer.schema.json
+
+layer:
+  # type: Module
+  # name: ESP8266
+  description: Arduino module with ESP8266 WiFi chip
+
+  # interfaces:
+  #   - consumes:
+  #     - A_UART: *
+  #     - RTOS2:
+  #   - provides:
+  #     - C_WiFi: 0
+
+  # packs:
+  #   - pack: ARM::CMSIS
+  #   - pack: ARM::CMSIS-Driver
+
+  components:
+    - component: Keil::CMSIS Driver:WiFi:ESP8266&UART

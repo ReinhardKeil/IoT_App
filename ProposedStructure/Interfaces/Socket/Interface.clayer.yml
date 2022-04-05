@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Open-CMSIS-Pack/devtools/schemas/projmgr/0.9.1/tools/projmgr/schemas/clayer.schema.json
+
+layer:
+  # type: Interface AWS
+  # name: IoT Socket
+  description: AWS Socket connecting over IoT Socket
+
+  # interfaces:
+  #   - consumes:
+  #     - IoT_Socket:
+  #     - FreeRTOS:
+  #   - provides:
+  #     - AWS_Socket:
+
+  add-paths:
+    - ./Interfaces/Socket
+    - ./config_files/Socket
+
+  misc:
+    - C*:
+      - -Wno-pragma-pack
+
+  groups:
+    - group: Interface_AWS
+      # add-paths:
+      #   - ./Interfaces/Socket
+      #   - ./config_files/Socket
+      groups:
+        - group: config_files
+          files:
+            - file: ./config_files/Socket/aws_iot_network_config.h
+            - file: ./config_files/Socket/FreeRTOSIPConfig.h
+            - file: ./config_files/Socket/iot_secure_sockets_config.h
+        - group: interfaces
+          files:
+            - file: ./Interfaces/Socket/network_startup.c
+            - file: ./Interfaces/Socket/iot_secure_sockets.c

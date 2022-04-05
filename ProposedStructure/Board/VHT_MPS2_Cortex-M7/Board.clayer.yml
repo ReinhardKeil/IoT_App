@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Open-CMSIS-Pack/devtools/schemas/projmgr/0.9.1/tools/projmgr/schemas/clayer.schema.json
+
+layer:
+  # type: Board
+  # name: VHT_MPS2_Cortex-M7
+  description: Board setup with interfaces
+
+  # interfaces:
+  #   - consumes:
+  #     - RTOS2:
+  #   - provides:
+  #     - C_ETH: 0
+  #     - STDOUT:
+  #     - STDIN:
+  #     - STDERR:
+  #     - Heap : 65536
+
+  # packs:
+  #   - pack: ARM::CMSIS
+  #   - pack: Keil::ARM_Compiler
+  #   - pack: Keil::V2M-MPS2_CMx_BSP@1.8.0
+
+  add-paths:                           # should be not required as header file is in list
+    - ./                               # should result in ./Board/VHT_MPS2_Cortex-M7    
+
+  components:
+    - component: Device:Startup&C Startup
+
+    - component: Keil::Board Support&V2M-MPS2:Common
+
+    - component: ARM::CMSIS:CORE
+
+    - component: Keil::CMSIS Driver:USART
+    - component: ARM::CMSIS Driver:Ethernet:Custom
+    - component: ARM::CMSIS Driver:VIO:Custom
+
+    - component: Keil::Compiler&ARM Compiler:Event Recorder&DAP
+    - component: Keil::Compiler&ARM Compiler:I/O:STDERR&User
+    - component: Keil::Compiler&ARM Compiler:I/O:STDOUT&User
+    - component: Keil::Compiler&ARM Compiler:I/O:STDIN&User
+
+  groups:
+    - group: Board
+      files:
+        - file: ./main.h
+        - file: ./main.c
+        - file: ./retarget_stdio.c
+        - file: ./vio_vht.c
+        - file: ./ETH_LAN91C111.h
+        - file: ./ETH_LAN91C111.c
+        - file: ./fvp_config.txt      # this file is misplaced as it is AVH configuration

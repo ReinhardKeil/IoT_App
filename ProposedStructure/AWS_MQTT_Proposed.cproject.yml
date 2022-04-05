@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Open-CMSIS-Pack/devtools/schemas/projmgr/0.9.1/tools/projmgr/schemas/cproject.schema.json
+
+project:
+
+  layers:
+    - layer: ./App.clayer.yml
+
+    - layer: ./Board/IMXRT1050-EVKB/Board.clayer.yml
+      for-type: 
+        - +Board-TCP
+        - +Board-WiFi
+
+    - layer: ./Board/VHT_MPS2_Cortex-M7/Board.clayer.yml
+      for-type:
+        - +VHT
+
+    - layer: ./Module/ESP8266/Module.clayer.yml
+      for-type: 
+        - +Board-WiFi
+
+    - layer: ./Interfaces/AWS/FreeRTOS+TCP/Interface.clayer.yml   # should be just ./Interface/
+      for-type:
+        - +Board-TCP
+
+    - layer: ./Interfaces/AWS/Socket/Interface.clayer.yml         # should be just ./Interface/
+      for-type:
+        - +VHT
+
+    - layer: ./Interfaces/AWS/WiFi/Interface.clayer.yml           # should be just ./Interface/
+      for-type:
+        - +Board-WiFi
+
+    - layer: ./Socket/VSocket/Socket.clayer.yml
+      for-type:
+        - +VHT

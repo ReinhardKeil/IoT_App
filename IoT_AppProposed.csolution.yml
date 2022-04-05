@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Open-CMSIS-Pack/devtools/schemas/projmgr/0.9.0/tools/projmgr/schemas/csolution.schema.json
+
+solution:
+
+  target-types:
+    - type: Board-WiFi   # EVKB_IMXRT1050_ESP8266
+      # board: EVKB-IMXRT1050_MDK
+      device: MIMXRT1052DVL6B
+    - type: Board-TCP    # EVKB_IMXRT1050_FreeRTOS_TCP
+      # board: EVKB-IMXRT1050_MDK
+      device: MIMXRT1052DVL6B
+
+    - type: VHT          # VHT_CM7_VSocket
+      device: ARM::CMSDK_CM7_DP_VHT
+
+  build-types:
+    - type: Debug
+      compiler: AC6
+      misc:
+        - C*:
+          - -O1
+          - -g
+    - type: Release
+      compiler: AC6
+      misc:
+        - C*:
+          - -O3
+
+  projects:
+    - project: ./ProposedStructure/AWS_MQTT_Proposed.cproject.yml
