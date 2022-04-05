@@ -31,35 +31,7 @@ This should go under the related `.\Board` directory (in this case the NXP `*.ME
 
 ## CSolution Issues
 
-### Config files in RTE Directory
-
-For initial project setup just the original config file should be stored under name `.ConfigFile.h@1.2.0`.  See #1 under https://github.com/Open-CMSIS-Pack/devtools/blob/main/tools/projmgr/docs/Manual/Overview.md#plm-of-configuration-files
-
-It appears that each `csolution convert` copies config files, but instead a version check should happen.  Only if the version mis-matches a copy and a user info should be issued.
-
-### Suggest to remove warning
-
-Attempt to convert with:
-``` 
-.\IoT_App>csolution convert -s IoT_AppProposed.csolution.yml
-```
-
-This issues several warnings:
-```
-warning csolution: output option was not specified, files won't be copied for context 'AWS_MQTT_Proposed.Debug+Board-WiFi'
-```
-
-Alternatively this could be issued just once as 'info'
-
-
-### Proposed Directories (IntDir, OutDir)
-
-Just in the project directory that stores the local `*.cproject.yml` file with this structure
-.\IntDir
-.\IntDir\.Debug+Board            // holds all intermediated files including the `.o` files
-.\OutDir\Board                   // holds the output binary including map files.  All builds share same so that Project1 debug can be intermixed with Project2 release (testing different build combinations when required)
-
-### Handling of *.clayer.yml file references
+### PROBLEM: Handling of *.clayer.yml file references
 
 The `.\Board\VHT_MPS2_Cortex-M7\Board.clayer.yml` contains just references to local files, but is included with
 ```
@@ -93,6 +65,36 @@ Instead of creating local path, the output should have paths to the source files
       <file category="doc" name="./Board/VHT_MPS2_Cortex-M7/fvp_config.txt"/>
     </group>
 ```
+
+### Proposed Directories (IntDir, OutDir)
+
+Just in the project directory that stores the local `*.cproject.yml` file with this structure
+```
+.\IntDir
+.\IntDir\.Debug+Board            // holds all intermediated files including the `.o` files
+.\OutDir\Board                   // holds the output binary including map files.  All builds share same so that Project1 debug can be intermixed with Project2 release (testing different build combinations when required)
+```
+
+### MINOR: Config files in RTE Directory
+
+For initial project setup just the original config file should be stored under name `.ConfigFile.h@1.2.0`.  See #1 under https://github.com/Open-CMSIS-Pack/devtools/blob/main/tools/projmgr/docs/Manual/Overview.md#plm-of-configuration-files
+
+It appears that each `csolution convert` copies config files, but instead a version check should happen.  Only if the version mis-matches a copy and a user info should be issued.
+
+### MINOR: Suggest to remove warning
+
+Attempt to convert with:
+``` 
+.\IoT_App>csolution convert -s IoT_AppProposed.csolution.yml
+```
+
+This issues several warnings:
+```
+warning csolution: output option was not specified, files won't be copied for context 'AWS_MQTT_Proposed.Debug+Board-WiFi'
+```
+
+Alternatively this could be issued just once as 'info'
+
 
 ## MDK Importer Issues
 
